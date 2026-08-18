@@ -43,6 +43,16 @@
         .reveal-section { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal-section.is-visible { opacity: 1; transform: translateY(0); }
         .glass-nav { background: rgba(9, 9, 11, 0.7); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        
+        /* Custom Outline Font Class */
+        .stroke-text {
+            color: transparent;
+            -webkit-text-stroke: 2px #fbbf24; /* Amber-400 */
+            text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+        @media (max-width: 768px) {
+            .stroke-text { -webkit-text-stroke: 1.5px #fbbf24; }
+        }
     </style>
 
     <!-- GSAP for Scroll Animations -->
@@ -75,44 +85,47 @@
     </nav>
 
     <!-- Cinematic Scroll Zoom Hero Section -->
-    <!-- h-[250vh] gives us enough scroll space to play the animation smoothly -->
     <section id="home" class="relative h-[250vh]">
-        <!-- Sticky container keeps the image in place while scrolling -->
-        <div class="sticky top-0 h-screen w-full overflow-hidden">
+        <div class="sticky top-0 h-screen w-full overflow-hidden bg-zinc-950">
             
-            <!-- Background Images for Optical Flow -->
+            <!-- Background Images -->
             <div class="absolute inset-0 z-0">
-                <!-- Image 2 (Inside/Menu - 5.jpg) - Starts hidden and zoomed out -->
-                <img id="zoom-img-2" src="5.jpg" class="absolute inset-0 w-full h-full object-cover scale-150 opacity-0" alt="Interior Menu">
-                <!-- Image 1 (Exterior - 1.jpg) - Starts normal, zooms in and fades out -->
+                <!-- Image 2 (Inside - 5.jpg) - Hidden initially, scaled up -->
+                <img id="zoom-img-2" src="5.jpg" class="absolute inset-0 w-full h-full object-cover scale-125 opacity-0 translate-y-10" alt="Interior Menu">
+                <!-- Image 1 (Exterior - 1.jpg) -->
                 <img id="zoom-img-1" src="1.jpg" class="absolute inset-0 w-full h-full object-cover" alt="Restaurant Exterior">
                 
-                <!-- Dark Overlay for text readability -->
-                <div class="absolute inset-0 bg-black/60 z-10"></div>
+                <!-- Dark Gradient Overlay for perfect text visibility -->
+                <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-zinc-950 z-10"></div>
             </div>
 
-            <!-- Hero Content -->
+            <!-- Hero Content with Outline Font -->
             <div class="relative z-20 h-full flex flex-col justify-center items-center text-center px-6">
-                <div id="hero-content" class="space-y-8">
-                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif text-white leading-[1.1] drop-shadow-2xl">
-                        Taste In <br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200 italic">Every Bite.</span>
+                <div id="hero-content" class="space-y-6 w-full">
+                    
+                    <h1 class="text-[15vw] md:text-[9rem] lg:text-[12rem] font-serif font-bold leading-none tracking-widest stroke-text select-none">
+                        SAVONRA
                     </h1>
-                    <p class="text-zinc-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-light drop-shadow-lg">
-                        Experience the ultimate culinary journey in Matara. Scroll down to step inside.
+                    
+                    <p class="text-zinc-200 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-light drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                        Experience the ultimate culinary journey in Matara. Fresh ingredients, cooked hot, and made with absolute passion.
                     </p>
-                    <div class="pt-4">
-                        <button onclick="orderViaWhatsApp()" class="bg-amber-500 text-zinc-950 px-10 py-4 rounded-full font-semibold tracking-widest uppercase hover:bg-amber-400 transition-all hover:scale-105">
+                    
+                    <div class="pt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                        <button onclick="orderViaWhatsApp()" class="bg-amber-500 text-zinc-950 px-10 py-4 rounded-full font-bold tracking-widest uppercase hover:bg-amber-400 transition-all hover:scale-105 shadow-xl">
                             Reserve a Table
                         </button>
+                        <a href="#menu" class="border border-zinc-400 text-white px-10 py-4 rounded-full font-bold tracking-widest uppercase hover:bg-zinc-800 transition-all text-center backdrop-blur-sm bg-black/20">
+                            Explore Menu
+                        </a>
                     </div>
                 </div>
             </div>
             
             <!-- Scroll Indicator -->
             <div id="scroll-indicator" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 text-white flex flex-col items-center animate-bounce">
-                <span class="text-xs uppercase tracking-widest mb-2 text-amber-400">Scroll</span>
-                <i class="fas fa-chevron-down"></i>
+                <span class="text-xs uppercase tracking-widest mb-2 text-amber-400 font-semibold drop-shadow-md">Scroll to Enter</span>
+                <i class="fas fa-chevron-down drop-shadow-md"></i>
             </div>
         </div>
     </section>
@@ -153,7 +166,7 @@
             </div>
 
             <div class="relative rounded-3xl overflow-hidden group reveal-section cursor-pointer" style="transition-delay: 300ms;">
-                <img src="1.jpg" alt="Ambience" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-[0.6] group-hover:brightness-90">
+                <img src="6.png" alt="Ambience" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-[0.6] group-hover:brightness-90">
                 <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 to-transparent"></div>
                 <div class="absolute bottom-6 left-6 right-6">
                     <h3 class="text-xl font-serif text-white">Luxury Ambience</h3>
@@ -219,9 +232,11 @@
                 </a>
             </div>
 
-            <div class="w-full lg:w-1/2 h-full">
-                <div class="rounded-3xl overflow-hidden border border-white/5 h-[400px] lg:h-[500px]">
-                    <img src="7.jpg" alt="Restaurant Location" class="w-full h-full object-cover">
+            <!-- Fixed Image Display -->
+            <div class="w-full lg:w-1/2 h-full flex items-center justify-center">
+                <div class="rounded-3xl overflow-hidden border border-white/5 w-full shadow-[0_0_30px_rgba(251,191,36,0.1)] bg-black">
+                    <!-- Changed from object-cover with fixed height to object-contain/natural height -->
+                    <img src="7.jpg" alt="Restaurant Location" class="w-full h-auto max-h-[600px] object-contain">
                 </div>
             </div>
         </div>
@@ -262,7 +277,7 @@
             document.querySelectorAll('.reveal-section').forEach(el => observer.observe(el));
         });
 
-        // 3. GSAP Scroll Zoom Effect (The magic part!)
+        // 3. Pro GSAP Cinematic Scroll Effect
         document.addEventListener('DOMContentLoaded', () => {
             gsap.registerPlugin(ScrollTrigger);
 
@@ -270,28 +285,28 @@
                 scrollTrigger: {
                     trigger: "#home",
                     start: "top top",
-                    end: "bottom top", // Plays the animation as you scroll down the 250vh area
-                    scrub: 1, // Smooth scrubbing effect
+                    end: "bottom top", 
+                    scrub: 1.5, // Smoother scrub for professional feel
                 }
             });
 
-            // Hide scroll indicator as soon as user starts scrolling
+            // Fade out indicator
             tl.to("#scroll-indicator", { opacity: 0, duration: 0.2 }, 0);
 
-            // Zoom in Exterior (1.jpg) massively and fade it out
-            tl.to("#zoom-img-1", { scale: 4, opacity: 0, duration: 2 }, 0);
+            // Exterior Image (1.jpg) zooms massively and fades out
+            tl.to("#zoom-img-1", { scale: 2.5, opacity: 0, y: 100, duration: 2, ease: "power1.inOut" }, 0);
             
-            // Bring Interior (5.jpg) from zoomed out to normal scale while fading in
-            tl.to("#zoom-img-2", { scale: 1, opacity: 1, duration: 2 }, 0);
+            // Interior Image (5.jpg) scales down to normal and fades in
+            tl.to("#zoom-img-2", { scale: 1, opacity: 1, y: 0, duration: 2, ease: "power1.inOut" }, 0);
 
-            // Optionally fade out the hero text so the food gets focus
-            tl.to("#hero-content", { opacity: 0, y: -50, duration: 1.5 }, 0);
+            // Move the hero content up and fade out
+            tl.to("#hero-content", { opacity: 0, y: -80, duration: 1.5, ease: "power1.inOut" }, 0);
         });
 
         // 4. WhatsApp
         function orderViaWhatsApp(item = "a reservation or order") {
             const phoneNumber = "94775505810"; 
-            const message = encodeURIComponent(`Hello Savonra Restaurant, I visited your website and I would like to make an inquiry about ${item}.`);
+            const message = encodeURIComponent(`Hello Savonra Restaurant, I visited your luxury website and I would like to make an inquiry about ${item}.`);
             window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
         }
     </script>
