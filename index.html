@@ -62,7 +62,7 @@
             text-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
         @media (max-width: 768px) {
-            .stroke-text { -webkit-text-stroke: 1.5px #fbbf24; }
+            .stroke-text { -webkit-text-stroke: 1.5px #fbbf24; text-shadow: 0 5px 15px rgba(0,0,0,0.8); }
         }
 
         /* Native Scrollbar Styling */
@@ -86,10 +86,10 @@
 
     <!-- Navbar -->
     <nav class="fixed top-0 w-full glass-nav z-50 transition-all">
-        <div class="px-6 py-4 flex justify-between items-center relative">
-            <div class="flex items-center gap-3 cursor-pointer">
-                <img src="9.jpg" alt="Logo" class="w-10 h-10 rounded-full border border-amber-500/50 shadow-[0_0_10px_rgba(251,191,36,0.2)]">
-                <span class="text-white font-serif font-bold text-lg md:text-xl tracking-widest uppercase">Savonra</span>
+        <div class="px-4 md:px-6 py-3 md:py-4 flex justify-between items-center relative">
+            <div class="flex items-center gap-2 md:gap-3 cursor-pointer">
+                <img src="9.jpg" alt="Logo" class="w-8 h-8 md:w-10 md:h-10 rounded-full border border-amber-500/50 shadow-[0_0_10px_rgba(251,191,36,0.2)]">
+                <span class="text-white font-serif font-bold text-base md:text-xl tracking-widest uppercase mt-1">Savonra</span>
             </div>
             
             <!-- Desktop Menu -->
@@ -107,13 +107,13 @@
                 </button>
                 
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden text-amber-400 text-2xl p-2 focus:outline-none">
+                <button id="mobile-menu-btn" class="md:hidden text-amber-400 text-xl p-2 focus:outline-none">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
         </div>
 
-        <!-- Mobile Menu (Hidden by default) -->
+        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden flex-col bg-zinc-950/95 backdrop-blur-xl border-t border-white/10 px-6 py-6 space-y-6 md:hidden text-center absolute w-full shadow-2xl">
             <a href="#home" class="mobile-link text-white font-medium uppercase tracking-widest hover:text-amber-400">Home</a>
             <a href="#menu" class="mobile-link text-white font-medium uppercase tracking-widest hover:text-amber-400">Menu</a>
@@ -137,11 +137,13 @@
             <!-- Hero Content -->
             <div class="relative z-20 h-full flex flex-col justify-center items-center text-center px-4 md:px-6 pt-16">
                 <div id="hero-content" class="space-y-6 w-full">
-                    <h1 class="text-[18vw] md:text-[9rem] lg:text-[12rem] font-serif font-bold leading-none tracking-widest stroke-text select-none">
+                    
+                    <!-- Fixed Mobile Text Size (Changed from 18vw to 12vw) -->
+                    <h1 class="text-[12vw] sm:text-[14vw] md:text-[9rem] lg:text-[12rem] font-serif font-bold leading-none tracking-widest stroke-text select-none">
                         SAVONRA
                     </h1>
                     
-                    <p class="text-zinc-200 text-base md:text-xl max-w-2xl mx-auto leading-relaxed font-light drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] px-4">
+                    <p class="text-zinc-200 text-sm sm:text-base md:text-xl max-w-2xl mx-auto leading-relaxed font-light drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] px-4">
                         Experience the ultimate culinary journey in Matara. Fresh ingredients, cooked hot, and made with absolute passion.
                     </p>
                     
@@ -328,7 +330,7 @@
                         entry.target.classList.add('is-visible');
                     }
                 });
-            }, { threshold: 0.1 }); // Lower threshold for mobile
+            }, { threshold: 0.1 }); 
 
             document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
                 observer.observe(el);
@@ -353,7 +355,6 @@
             tl.to("#zoom-img-2", { scale: 1, opacity: 1, y: 0, duration: 2 }, 0);
             tl.to("#hero-content", { opacity: 0, y: -100, duration: 1.5 }, 0);
         });
-        
 
         // WhatsApp
         function orderViaWhatsApp(item = "a reservation or order") {
