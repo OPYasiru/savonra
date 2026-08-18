@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Savonra | Ultra Luxury Dining</title>
     
-    <!-- Favicon Code -->
+    <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="9.jpg">
     <link rel="apple-touch-icon" href="9.jpg">
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
-    <!-- FontAwesome for Icons -->
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Tailwind CSS -->
@@ -44,26 +44,19 @@
     </script>
     
     <style>
-        /* Fix Horizontal Scrolling completely */
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
-            max-width: 100vw;
-            position: relative;
-        }
+        /* Block horizontal scrolling */
+        html, body { overflow-x: hidden; width: 100%; position: relative; }
 
-        /* Modern Scroll Reveal Animations */
+        /* Scroll Reveal Animations */
         .reveal-up { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal-left { opacity: 0; transform: translateX(-30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal-right { opacity: 0; transform: translateX(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal-scale { opacity: 0; transform: scale(0.8); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
-        
-        /* When element becomes visible */
         .is-visible { opacity: 1; transform: translate(0) scale(1); }
 
         .glass-nav { background: rgba(9, 9, 11, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
         
-        /* Custom Outline Font Class */
+        /* Outline Font */
         .stroke-text {
             color: transparent;
             -webkit-text-stroke: 2px #fbbf24;
@@ -73,14 +66,14 @@
             .stroke-text { -webkit-text-stroke: 1.5px #fbbf24; }
         }
 
-        /* Native Scrollbar Styling */
+        /* Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #09090b; }
         ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #fbbf24; }
     </style>
 
-    <!-- GSAP for Scroll Animations -->
+    <!-- GSAP for Butter Smooth Hero Animation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
@@ -100,7 +93,6 @@
                 <span class="text-white font-serif font-bold text-lg md:text-xl tracking-widest uppercase">Savonra</span>
             </div>
             
-            <!-- Desktop Menu -->
             <div class="hidden md:flex gap-8 text-sm uppercase tracking-widest font-medium text-zinc-400">
                 <a href="#home" class="hover:text-amber-400 transition-colors">Home</a>
                 <a href="#menu" class="hover:text-amber-400 transition-colors">Menu</a>
@@ -108,20 +100,17 @@
                 <a href="#visit" class="hover:text-amber-400 transition-colors">Visit</a>
             </div>
             
-            <!-- Order Button & Mobile Toggle -->
             <div class="flex items-center gap-4">
                 <button onclick="orderViaWhatsApp()" class="hidden md:flex items-center gap-2 border border-amber-500/50 text-amber-400 px-6 py-2 rounded-full font-medium tracking-wide hover:bg-amber-500 hover:text-zinc-950 transition-all duration-300">
                     <i class="fab fa-whatsapp text-lg"></i> Order Now
                 </button>
-                
-                <!-- Mobile Menu Button -->
                 <button id="mobile-menu-btn" class="md:hidden text-amber-400 text-2xl p-2 focus:outline-none">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
         </div>
 
-        <!-- Mobile Menu (Hidden by default) -->
+        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden flex-col bg-zinc-950/95 backdrop-blur-xl border-t border-white/10 px-6 py-6 space-y-6 md:hidden text-center absolute w-full shadow-2xl">
             <a href="#home" class="mobile-link text-white font-medium uppercase tracking-widest hover:text-amber-400">Home</a>
             <a href="#menu" class="mobile-link text-white font-medium uppercase tracking-widest hover:text-amber-400">Menu</a>
@@ -134,45 +123,51 @@
     </nav>
 
     <!-- Cinematic Scroll Zoom Hero Section -->
-    <section id="home" class="relative h-[200vh]">
-        <div class="sticky top-0 h-screen w-full overflow-hidden bg-zinc-950">
-            <div class="absolute inset-0 z-0">
-                <img id="zoom-img-2" src="5.jpg" class="absolute inset-0 w-full h-full object-cover scale-125 opacity-0 translate-y-10" alt="Interior Menu">
-                <img id="zoom-img-1" src="1.jpg" class="absolute inset-0 w-full h-full object-cover" alt="Restaurant Exterior">
-                <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-zinc-950 z-10"></div>
-            </div>
+    <section id="home" class="relative w-full h-screen overflow-hidden bg-zinc-950">
+        
+        <!-- Image Layers with explicit Z-Index to fix visibility issue -->
+        <div class="absolute inset-0 w-full h-full">
+            <!-- Image 2 (Interior - 5.jpg) : Bottom Layer -->
+            <img id="zoom-img-2" src="5.jpg" class="absolute inset-0 w-full h-full object-cover z-0" alt="Interior Menu" style="opacity: 0; transform: scale(1.2);">
+            
+            <!-- Image 1 (Exterior - 1.jpg) : Middle Layer -->
+            <img id="zoom-img-1" src="1.jpg" class="absolute inset-0 w-full h-full object-cover z-10" alt="Restaurant Exterior">
+            
+            <!-- Dark Overlay : Top Layer -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-zinc-950 z-20"></div>
+        </div>
 
-            <!-- Hero Content -->
-            <div class="relative z-20 h-full flex flex-col justify-center items-center text-center px-4 md:px-6 pt-16">
-                <div id="hero-content" class="space-y-6 w-full">
-                    <h1 class="text-[18vw] md:text-[9rem] lg:text-[12rem] font-serif font-bold leading-none tracking-widest stroke-text select-none">
-                        SAVONRA
-                    </h1>
-                    
-                    <p class="text-zinc-200 text-base md:text-xl max-w-2xl mx-auto leading-relaxed font-light drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] px-4">
-                        Experience the ultimate culinary journey in Matara. Fresh ingredients, cooked hot, and made with absolute passion.
-                    </p>
-                    
-                    <div class="pt-6 md:pt-8 flex flex-col sm:flex-row gap-4 justify-center px-4">
-                        <button onclick="orderViaWhatsApp()" class="bg-amber-500 text-zinc-950 px-8 py-3 md:px-10 md:py-4 rounded-full font-bold tracking-widest uppercase hover:bg-amber-400 transition-all hover:scale-105 shadow-xl text-sm md:text-base">
-                            Reserve a Table
-                        </button>
-                    </div>
+        <!-- Hero Content -->
+        <div class="relative z-30 h-full flex flex-col justify-center items-center text-center px-4 md:px-6 pt-16 w-full">
+            <div id="hero-content" class="space-y-6 w-full">
+                <h1 class="text-[18vw] md:text-[9rem] lg:text-[12rem] font-serif font-bold leading-none tracking-widest stroke-text select-none">
+                    SAVONRA
+                </h1>
+                
+                <p class="text-zinc-200 text-base md:text-xl max-w-2xl mx-auto leading-relaxed font-light drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] px-4">
+                    Experience the ultimate culinary journey in Matara. Fresh ingredients, cooked hot, and made with absolute passion.
+                </p>
+                
+                <div class="pt-6 md:pt-8 flex flex-col sm:flex-row gap-4 justify-center px-4">
+                    <button onclick="orderViaWhatsApp()" class="bg-amber-500 text-zinc-950 px-8 py-3 md:px-10 md:py-4 rounded-full font-bold tracking-widest uppercase hover:bg-amber-400 transition-all hover:scale-105 shadow-xl text-sm md:text-base">
+                        Reserve a Table
+                    </button>
                 </div>
             </div>
-            
-            <div id="scroll-indicator" class="absolute bottom-6 md:bottom-10 left-1/2 transform -translate-x-1/2 z-20 text-white flex flex-col items-center animate-bounce">
-                <span class="text-[10px] md:text-xs uppercase tracking-widest mb-1 md:mb-2 text-amber-400 font-semibold drop-shadow-md">Scroll to Enter</span>
-                <i class="fas fa-chevron-down drop-shadow-md text-sm md:text-base"></i>
-            </div>
+        </div>
+        
+        <!-- Scroll Indicator - Fixed Alignment -->
+        <div id="scroll-indicator" class="absolute bottom-8 w-full flex flex-col items-center justify-center z-30 text-white animate-bounce">
+            <span class="text-[10px] md:text-xs uppercase tracking-widest mb-1 md:mb-2 text-amber-400 font-semibold drop-shadow-md">Scroll to Enter</span>
+            <i class="fas fa-chevron-down drop-shadow-md text-sm md:text-base"></i>
         </div>
     </section>
 
-    <!-- Main Content Wrapper (Hides any stray horizontal overflow) -->
-    <main class="overflow-x-hidden w-full">
+    <!-- Main Content Wrapper -->
+    <main class="overflow-x-hidden w-full bg-zinc-950 relative z-40">
 
         <!-- Bento Grid Menu Section -->
-        <section id="menu" class="py-16 md:py-24 px-4 sm:px-6 lg:px-12 container mx-auto relative z-30 bg-zinc-950">
+        <section id="menu" class="py-16 md:py-24 px-4 sm:px-6 lg:px-12 container mx-auto">
             <div class="text-center mb-10 md:mb-16 reveal-up">
                 <h2 class="text-3xl md:text-4xl lg:text-5xl font-serif mb-3 md:mb-4 text-white">Our <span class="text-amber-400 italic">Culinary</span> Art</h2>
                 <p class="text-zinc-400 max-w-2xl mx-auto font-light text-sm md:text-base px-2">Discover our highly curated selection of signature dishes and experiences.</p>
@@ -217,7 +212,7 @@
         </section>
 
         <!-- Gallery Strip -->
-        <section id="experience" class="py-8 md:py-12 px-4 sm:px-6 container mx-auto bg-zinc-950 overflow-hidden">
+        <section id="experience" class="py-8 md:py-12 px-4 sm:px-6 container mx-auto">
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
                 <div class="rounded-xl md:rounded-2xl overflow-hidden h-32 md:h-48 lg:h-64 reveal-scale"><img src="4.jpg" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700"></div>
                 <div class="rounded-xl md:rounded-2xl overflow-hidden h-32 md:h-48 lg:h-64 reveal-scale" style="transition-delay: 100ms;"><img src="3.jpg" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700"></div>
@@ -227,7 +222,7 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="visit" class="py-16 md:py-24 px-4 sm:px-6 container mx-auto bg-zinc-950 overflow-hidden">
+        <section id="visit" class="py-16 md:py-24 px-4 sm:px-6 container mx-auto">
             <div class="bg-zinc-900/40 border border-white/5 rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-8 lg:p-16 flex flex-col lg:flex-row gap-10 lg:gap-12 items-center backdrop-blur-sm">
                 
                 <div class="w-full lg:w-1/2 space-y-8 md:space-y-10 reveal-left">
@@ -341,14 +336,14 @@
                         entry.target.classList.add('is-visible');
                     }
                 });
-            }, { threshold: 0.1 }); 
+            }, { threshold: 0.1 });
 
             document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
                 observer.observe(el);
             });
         });
 
-        // GSAP Cinematic Zoom Effect
+        // Butter Smooth GSAP Cinematic Zoom Effect
         document.addEventListener('DOMContentLoaded', () => {
             gsap.registerPlugin(ScrollTrigger);
 
@@ -356,15 +351,16 @@
                 scrollTrigger: {
                     trigger: "#home",
                     start: "top top",
-                    end: "bottom top", 
-                    scrub: true,
+                    end: "+=120%", // Keep scrolling for 1.2x screen height
+                    scrub: 1, // 1-second lag creates the "Butter Smooth" native feel
+                    pin: true, // Pins the section so it doesn't jump
                 }
             });
 
             tl.to("#scroll-indicator", { opacity: 0, duration: 0.2 }, 0);
-            tl.to("#zoom-img-1", { scale: 2.5, opacity: 0, duration: 2 }, 0);
-            tl.to("#zoom-img-2", { scale: 1, opacity: 1, y: 0, duration: 2 }, 0);
-            tl.to("#hero-content", { opacity: 0, y: -100, duration: 1.5 }, 0);
+            tl.to("#zoom-img-1", { scale: 3, opacity: 0, duration: 2 }, 0);
+            tl.to("#zoom-img-2", { scale: 1, opacity: 1, duration: 2 }, 0);
+            tl.to("#hero-content", { opacity: 0, scale: 1.1, duration: 1.5 }, 0);
         });
 
         // WhatsApp
